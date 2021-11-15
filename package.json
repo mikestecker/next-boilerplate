@@ -20,7 +20,8 @@
     "export": "next build && next export -o dist",
     "build-prod": "run-s clean build export",
     "clean": "rimraf .next dist",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "clsx": "^1.1.1",
@@ -35,6 +36,8 @@
     "autoprefixer": "^10.4.0",
     "eslint": "7",
     "eslint-config-next": "12.0.3",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.11",
     "prettier": "2.4.1",
@@ -50,5 +53,9 @@
     ">0.2%",
     "not dead",
     "not IE 11"
-  ]
+  ],
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
 }
