@@ -1,6 +1,17 @@
 {
   "name": "next-boilerplate",
   "private": true,
+  "description": "My starter template for NextJS with TypeScript.",
+  "homepage": "https://github.com/mikestecker/next-boilerplate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikestecker/next-boilerplate.git"
+  },
+  "author": "Mike Stecker <mike@stecker.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikestecker/next-boilerplate/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
