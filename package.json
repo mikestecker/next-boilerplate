@@ -76,9 +76,5 @@
     ">0.2%",
     "not dead",
     "not IE 11"
-  ],
-  "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
-  }
+  ]
 }
