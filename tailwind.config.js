@@ -4,7 +4,7 @@ module.exports = {
     './src/pages/**/*.{css,js,ts,jsx,tsx}',
     './src/styles/**/*.{css}',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {},
   },
