@@ -26,8 +26,20 @@
   "devDependencies": {
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
+    "autoprefixer": "^10.4.0",
     "eslint": "7",
     "eslint-config-next": "12.0.3",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
     "typescript": "4.4.4"
-  }
+  },
+  "engines": {
+    "node": ">=16",
+    "yarn": ">=1.22.5"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not IE 11"
+  ]
 }
