@@ -14,6 +14,7 @@ My very own NextJS boilerplate created for use in projects.
 - 👑 [Atomic Design organization](https://bradfrost.com/blog/post/atomic-web-design/)
 - 🗂 [Absolute imports](https://github.com/vitejs/vite/issues/88#issuecomment-762415200)
 - 😃 [Hero icons](https://heroicons.com/)
+- 🗺️ [Next Sitemap](https://www.iamvishnusankar.com/blogs/how-to-generate-sitemap-for-nextjs-projects/)
 - ☁️ Deploy on Vercel, zero-config
 
 ### Coding Style
