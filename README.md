@@ -9,7 +9,7 @@ My very own NextJS boilerplate created for use in projects.
 - 🫀 [Jest](https://jestjs.io/) - unitary testing made easy
 - 🎨 [Tailwind with JIT](https://tailwindcss.com/) - next generation utility-first CSS
 - 🌚 [Dark Mode](https://tailwindcss.com/docs/dark-mode)
-- 💅🏾 [Styled Components](https://styled-components.com)
+- 👩‍🎤 [Emotion](https://emotion.sh)
 - 🪢 [CSS Modules](https://github.com/css-modules/css-modules)
 - 👑 [Atomic Design organization](https://bradfrost.com/blog/post/atomic-web-design/)
 - 🗂 [Absolute imports](https://github.com/vitejs/vite/issues/88#issuecomment-762415200)
