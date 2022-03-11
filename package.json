@@ -29,7 +29,7 @@
     "typecheck:app": "tsc --noEmit"
   },
   "dependencies": {
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@heroicons/react": "^1.0.5",
     "clsx": "^1.1.1",
