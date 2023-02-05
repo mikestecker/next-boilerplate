@@ -4,7 +4,7 @@ My very own NextJS boilerplate created for use in projects.
 
 ## Features (so far)
 
-- ⚡️ [Next 12](https://nextjs.org/docs/getting-started)
+- ⚡️ [Next 13](https://nextjs.org/docs/getting-started)
 - 🦾 TypeScript, of course
 - 🫀 [Jest](https://jestjs.io/) - unitary testing made easy
 - 🎨 [Tailwind with JIT](https://tailwindcss.com/) - next generation utility-first CSS
