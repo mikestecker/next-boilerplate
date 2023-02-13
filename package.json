@@ -51,7 +51,7 @@
     "autoprefixer": "^10.4.13",
     "babel-jest": "^29.4.1",
     "concurrently": "^7.6.0",
-    "eslint": "^8.33.0",
+    "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-next": "^13.1.6",
