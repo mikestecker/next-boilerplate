@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { analytics } from '@repo/analytics/posthog/server';
-import { clerkClient } from '@repo/auth/server';
+import { database } from '@repo/database';
 import { parseError } from '@repo/observability/error';
 import { log } from '@repo/observability/log';
 import { stripe } from '@repo/payments';
@@ -9,12 +9,13 @@ import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 const getUserFromCustomerId = async (customerId: string) => {
-  const clerk = await clerkClient();
-  const users = await clerk.users.getUserList();
-
-  const user = users.data.find(
-    (user) => user.privateMetadata.stripeCustomerId === customerId
-  );
+  const user = await database.user.findFirst({
+    where: {
+      privateMetadata: {
+        contains: { stripeCustomerId: customerId },
+      },
+    },
+  });
 
   return user;
 };

@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { AvatarStack } from './components/avatar-stack';
 import { Cursors } from './components/cursors';
 import { Header } from './components/header';
+import { headers } from 'next/headers';
 
 const title = 'Acme Inc';
 const description = 'My application.';
@@ -24,7 +25,20 @@ export const metadata: Metadata = {
 
 const App = async () => {
   const pages = await database.page.findMany();
-  const { orgId } = await auth();
+  const h = await headers();
+  const authSession = await auth.api.getSession({
+    headers: h,
+  });
+
+  if (!authSession) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  const orgId = authSession.session.activeOrganizationId ?? undefined;
+  // const fullOrganization = await auth.api.getFullOrganization({
+  //   headers: h,
+  //   query: { organizationId: orgId },
+  // });
 
   if (!orgId) {
     notFound();

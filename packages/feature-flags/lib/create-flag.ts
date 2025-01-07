@@ -1,5 +1,5 @@
-import { analytics } from '@repo/analytics/posthog/server';
-import { auth } from '@repo/auth/server';
+// import { analytics } from '@repo/analytics/posthog/server';
+// import { auth } from '@repo/auth/server';
 import { unstable_flag as flag } from '@vercel/flags/next';
 
 export const createFlag = (key: string) =>
@@ -7,14 +7,14 @@ export const createFlag = (key: string) =>
     key,
     defaultValue: false,
     async decide() {
-      const { userId } = await auth();
+      // const { userId } = await auth();
 
-      if (!userId) {
+      // if (!userId) {
         return this.defaultValue as boolean;
-      }
+      // }
 
-      const isEnabled = await analytics.isFeatureEnabled(key, userId);
+      // const isEnabled = await analytics.isFeatureEnabled(key, userId);
 
-      return isEnabled ?? (this.defaultValue as boolean);
+      // return isEnabled ?? (this.defaultValue as boolean);
     },
   });

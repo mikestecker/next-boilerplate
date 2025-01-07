@@ -1,6 +1,7 @@
-import { auth, currentUser } from '@repo/auth/server';
+import { auth } from '@repo/auth/server';
 import { authenticate } from '@repo/collaboration/auth';
 import { tailwind } from '@repo/tailwind-config';
+import { headers } from 'next/headers';
 
 const COLORS = [
   tailwind.theme.colors.red[500],
@@ -23,20 +24,27 @@ const COLORS = [
 ];
 
 export const POST = async () => {
-  const user = await currentUser();
-  const { orgId } = await auth();
+  const authSession = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-  if (!user || !orgId) {
+  if (!authSession) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  const { session, user } = authSession;
+
+  if (!session.userId || !session.activeOrganizationId) {
     return new Response('Unauthorized', { status: 401 });
   }
 
   return authenticate({
-    userId: user.id,
-    orgId,
+    userId: session.userId,
+    orgId: session.activeOrganizationId ?? null,
     userInfo: {
       name:
-        user.fullName ?? user.emailAddresses.at(0)?.emailAddress ?? undefined,
-      avatar: user.imageUrl ?? undefined,
+        user.name ?? user.email ?? undefined,
+      avatar: user.image ?? undefined,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
     },
   });

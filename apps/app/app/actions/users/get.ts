@@ -1,23 +1,8 @@
 'use server';
 
-import {
-  type OrganizationMembership,
-  auth,
-  clerkClient,
-} from '@repo/auth/server';
+import { auth } from '@repo/auth/server';
 import { tailwind } from '@repo/tailwind-config';
-
-const getName = (user: OrganizationMembership): string | undefined => {
-  let name = user.publicUserData?.firstName;
-
-  if (name && user.publicUserData?.lastName) {
-    name = `${name} ${user.publicUserData.lastName}`;
-  } else if (!name) {
-    name = user.publicUserData?.identifier;
-  }
-
-  return name;
-};
+import { headers } from 'next/headers';
 
 const colors = [
   tailwind.theme.colors.red[500],
@@ -50,28 +35,37 @@ export const getUsers = async (
     }
 > => {
   try {
-    const { orgId } = await auth();
+    const h = await headers();
+    const authSession = await auth.api.getSession({
+      headers: h,
+    });
 
-    if (!orgId) {
+    if (!authSession) {
       throw new Error('Not logged in');
     }
 
-    const clerk = await clerkClient();
+    const orgId = authSession.session.activeOrganizationId ?? undefined;
 
-    const members = await clerk.organizations.getOrganizationMembershipList({
-      organizationId: orgId,
-      limit: 100,
+    const fullOrganization = await auth.api.getFullOrganization({
+      headers: h,
+      query: { organizationId: orgId },
     });
 
-    const data: Liveblocks['UserMeta']['info'][] = members.data
+    if (!orgId || !fullOrganization) {
+      throw new Error('Not logged in');
+    }
+
+    const { members } = fullOrganization;
+
+    const data: Liveblocks['UserMeta']['info'][] = members
       .filter(
-        (user) =>
-          user.publicUserData?.userId &&
-          userIds.includes(user.publicUserData.userId)
+        ({ user }) =>
+          user.id &&
+          userIds.includes(user.id)
       )
-      .map((user) => ({
-        name: getName(user) ?? 'Unknown user',
-        picture: user.publicUserData?.imageUrl ?? '',
+      .map(({ user }) => ({
+        name: user.name ?? 'Unknown user',
+        picture: user.image ?? '',
         color: colors[Math.floor(Math.random() * colors.length)],
       }));
 

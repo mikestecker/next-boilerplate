@@ -1,10 +1,8 @@
-import 'server-only';
-
 import { betterAuth } from 'better-auth';
 import { nextCookies } from "better-auth/next-js";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { database } from "@repo/database"
-import { organization } from 'better-auth/plugins';
+import { admin, organization } from 'better-auth/plugins';
 
 export const auth = betterAuth({
   database: prismaAdapter(database, {
@@ -12,7 +10,11 @@ export const auth = betterAuth({
   }),
   plugins: [
     nextCookies(),
-    organization()
+    admin(),
+    organization(),
   ],
+  emailAndPassword: {
+    enabled: true
+  },
   //...add more options here
 });
